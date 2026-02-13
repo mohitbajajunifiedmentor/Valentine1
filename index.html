@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Queen ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(-45deg,#ff416c,#ff4b2b,#ff6a88,#ff99ac);
+  background-size:400% 400%;
+  animation:gradient 10s ease infinite;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.card{
+  backdrop-filter:blur(25px);
+  background:rgba(255,255,255,0.15);
+  padding:50px;
+  border-radius:30px;
+  text-align:center;
+  color:white;
+  width:450px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.4);
+  animation:fadeIn 1.2s ease forwards;
+  position:relative;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.6);}
+  to{opacity:1;transform:scale(1);}
+}
+
+h2{
+  font-size:26px;
+  margin-bottom:25px;
+  min-height:60px;
+  transition:0.5s;
+}
+
+.hidden{
+  opacity:0;
+  transform:scale(0.5);
+}
+
+.buttons{position:relative;height:120px;}
+
+button{
+  padding:12px 35px;
+  border:none;
+  border-radius:40px;
+  font-size:16px;
+  cursor:pointer;
+  position:absolute;
+  transition:0.2s ease;
+}
+
+#yes{
+  background:#ff1744;
+  color:white;
+  left:80px;
+}
+
+#yes:hover{
+  transform:scale(1.2);
+  box-shadow:0 0 40px #ff1744;
+}
+
+#no{
+  background:white;
+  color:#333;
+  left:260px;
+}
+
+.result{
+  display:none;
+  margin-top:20px;
+  font-size:24px;
+  animation:pop 1s ease forwards;
+}
+
+@keyframes pop{
+  0%{transform:scale(0);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+
+.big{
+  font-size:70px;
+  animation:bounce 1s infinite alternate;
+}
+
+@keyframes bounce{
+  from{transform:translateY(0);}
+  to{transform:translateY(-20px);}
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  color:white;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Random NO messages */
+.popup{
+  position:absolute;
+  font-size:22px;
+  font-weight:bold;
+  color:#fff176;
+  animation:fadeMove 2s forwards;
+}
+
+@keyframes fadeMove{
+  0%{opacity:0; transform:scale(0.5);}
+  50%{opacity:1;}
+  100%{opacity:0; transform:translateY(-50px) scale(1.2);}
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question">
+    Gunnu Will You Be My Valentine? 💘
+  </h2>
+
+  <div class="buttons" id="btns">
+    <button id="yes">Yes ❤️</button>
+    <button id="no">No 😭</button>
+  </div>
+
+  <div class="result" id="result">
+    Thanku You My Making My Day
+    <div class="big">❤️</div>
+  </div>
+</div>
+
+<script>
+
+/* Floating hearts */
+for(let i=0;i<40;i++){
+  const h=document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*4+3)+"s";
+  document.body.appendChild(h);
+}
+
+/* NO button logic */
+const no=document.getElementById("no");
+
+const messages=[
+"Tu Pyar Nahi Karti Merse? 😭",
+"Badi Hi BatMiz Hai Tu to 😢",
+"Chatta Kha Kar Hi Yes Karegi? 😂",
+"Main seriously ro dunga 😭",
+"Mai Nahi Khel Raha Jaa 😢",
+];
+
+no.addEventListener("mouseover",()=>{
+
+  // Move button super fast
+  no.style.left=Math.random()*350+"px";
+  no.style.top=Math.random()*100+"px";
+
+  // Create random popup message
+  const popup=document.createElement("div");
+  popup.classList.add("popup");
+  popup.innerText=messages[Math.floor(Math.random()*messages.length)];
+
+  popup.style.left=Math.random()*window.innerWidth+"px";
+  popup.style.top=Math.random()*window.innerHeight+"px";
+
+  document.body.appendChild(popup);
+
+  setTimeout(()=>popup.remove(),2000);
+});
+
+/* YES click */
+const yes=document.getElementById("yes");
+yes.addEventListener("click",()=>{
+  document.getElementById("question").classList.add("hidden");
+  document.getElementById("btns").style.display="none";
+  document.getElementById("result").style.display="block";
+});
+
+</script>
+
+</body>
+</html>
